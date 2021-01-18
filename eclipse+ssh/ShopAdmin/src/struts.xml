@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+"http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<package name="strutsBean" extends="struts-default"
+		namespace="/">
+		<!-- 定义一个名为“general”的拦截器 -->
+		<interceptors>
+			<interceptor name="general"
+				class="shopping.interceptors.GeneralInterceptor" />
+		</interceptors>
+		
+		<action name="inputvalue" class="customerAction" method="inputValue">
+		    <result name="success">/adminSys/updateCustomer.jsp</result>
+		</action>
+		<action name="adminLogin" class="adminAction" method="login">
+			<result name="loginsuccess">/adminSys/index.html</result>
+			<result name="loginfail">/adminSys/adminLogin.jsp</result>
+			<result name="input">adminLogin.jsp</result>
+		</action>
+		<action name="customerUpdate" class="customerAction" method="update">
+			<result name="updatesuccess" type="redirectAction">/adminSys/getAllCustomers</result>
+			<result name="updatefail">/adminSys/updateCustomer.jsp</result>
+			<!-- 配置系统默认拦截器 -->
+			<interceptor-ref name="defaultStack" />
+			<!-- 配置 general 拦截器 -->
+			<interceptor-ref name="general" />
+		</action>
+		<action name="customerDelete" class="customerAction" method="delete">
+			<result name="deletesuccess" type="redirectAction">/adminSys/getAllCustomers</result>
+			<result name="deletefail" type="redirectAction">/adminSys/getAllCustomers</result>
+		</action>
+		<action name="getAllCustomers" class="customerAction" method="getAllCustomers">
+		    <result name="login">/adminSys/adminLogin.jsp</result>
+			<result name="success">/adminSys/customerList.jsp</result>
+			<!-- 配置系统默认拦截器 -->
+			<interceptor-ref name="defaultStack" />
+			<!-- 配置general 拦截器 -->
+			<interceptor-ref name="general" />
+		</action>
+		<action name="findByAccount" class="customerAction" method="findByAccount">
+			<result name="success">/adminSys/customerList.jsp</result>
+			<result name="fail">/adminSys/customerList.jsp</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+	<!-- 定义 Struts2 的核心 Filter -->
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>
+			org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter
+		</filter-class>
+	</filter>
+	<!-- 让 Struts2 的核心 Filter 拦截所有请求 -->
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<welcome-file-list>
+        <welcome-file>adminSys/login.jsp</welcome-file>
+    </welcome-file-list>
+    <!-- 配置spring监听器 -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+</web-app>
