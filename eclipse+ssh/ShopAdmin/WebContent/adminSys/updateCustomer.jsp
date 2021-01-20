@@ -77,6 +77,20 @@
                         </ul>
                     </li>
                     <li>
+                        <a href="#"><i class="fa fa-sitemap "></i>商品管理 <span class="fa arrow"></span></a>
+                         <ul class="nav nav-second-level">
+                            <li>
+                                <a href="getAllItems"><i class="fa fa-bicycle "></i>商品一览</a>
+                            </li>
+                             <li>
+                                <a href="addItem.jsp"><i class="fa fa-flask "></i>商品添加</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                         <a href="getAllFeedbacks"><i class="fa fa-bicycle "></i>反馈信息</a>
+                    </li>
+                    <li>
                         <a href="adminLogin.jsp"><i class="fa fa-sign-in "></i>退出</a>
                     </li>
 				</ul>
@@ -91,7 +105,6 @@
 						<h1 class="page-head-line">Basic Forms</h1>
 						<h1 class="page-subhead-line">This is dummy text , you can
 							replace it with your original text.</h1>
-
 					</div>
 				</div>
 				<!-- /. ROW  -->
@@ -100,8 +113,10 @@
 						<div class="panel panel-danger">
 							<div class="panel-heading">SINGUP FORM</div>
 							<div class="panel-body">
+							    <!-- 输出验证信息 -->
+							    <s:fielderror></s:fielderror>
+							    <s:fielderror></s:fielderror>
 								<form action="customerUpdate" role="form">
-
 									<div class="form-group">
 										<label>用户编号</label> <input class="form-control" type="text"
 											name="customer.customerID" readonly="readonly" 
@@ -124,17 +139,17 @@
 									</div>
 									<div class="form-group">
 										<label>性别</label> <input class="form-control" type="text"
-											name="customer.sex" 
+											name="customer.sex" placeholder="请输入‘男’或‘女’"
 											value="${customer.sex}">
 									</div>
 									<div class="form-group">
 										<label>电话</label> <input class="form-control" type="text"
-											name="customer.phone" 
+											name="customer.phone" readonly="readonly"
 											value="${customer.phone}">
 									</div>
 									<div class="form-group">
 										<label>电子邮箱</label> <input class="form-control" type="text"
-											name="customer.email" 
+											name="customer.email"
 											value="${customer.email}">
 									</div>
 									<div class="form-group">
@@ -142,9 +157,7 @@
 											name="customer.address" 
 											value="${customer.address}">
 									</div>
-
 									<button type="submit" class="btn btn-danger">提交修改</button>
-
 								</form>
 							</div>
 						</div>

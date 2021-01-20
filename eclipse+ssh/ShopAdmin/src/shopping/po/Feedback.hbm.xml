@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="shopping.po.Feedback" table="feedback"
+		catalog="shopping">
+		<id name="feedID" type="int">
+			<column name="feedID" />
+		</id>
+		<property name="name" type="string">
+			<column name="name" length="20" />
+		</property>
+		<property name="email" type="string">
+			<column name="email" length="100" />
+		</property>
+		<property name="subject" type="string">
+			<column name="subject" length="100" />
+		</property>
+		<property name="propose" type="string">
+			<column name="propose" length="200" />
+		</property>
+	</class>
+</hibernate-mapping>

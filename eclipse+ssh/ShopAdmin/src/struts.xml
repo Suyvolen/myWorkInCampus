@@ -14,6 +14,22 @@
 		<action name="inputvalue" class="customerAction" method="inputValue">
 		    <result name="success">/adminSys/updateCustomer.jsp</result>
 		</action>
+		<action name="feedbackDetail" class="customerAction" method="feedbackDetail">
+		    <result name="success">/adminSys/feedbackDetail.jsp</result>
+		    <result name="login">/adminSys/adminLogin.jsp</result>
+		    <!-- 配置系统默认拦截器 -->
+			<interceptor-ref name="defaultStack" />
+			<!-- 配置general 拦截器 -->
+			<interceptor-ref name="general" />
+		</action>
+		<action name="itemDetail" class="itemAction" method="itemDetail">
+		    <result name="success">/adminSys/itemDetail.jsp</result>
+		    <result name="login">/adminSys/adminLogin.jsp</result>
+		    <!-- 配置系统默认拦截器 -->
+			<interceptor-ref name="defaultStack" />
+			<!-- 配置general 拦截器 -->
+			<interceptor-ref name="general" />
+		</action>
 		<action name="adminLogin" class="adminAction" method="login">
 			<result name="loginsuccess">/adminSys/index.html</result>
 			<result name="loginfail">/adminSys/adminLogin.jsp</result>
@@ -22,6 +38,8 @@
 		<action name="customerUpdate" class="customerAction" method="update">
 			<result name="updatesuccess" type="redirectAction">/adminSys/getAllCustomers</result>
 			<result name="updatefail">/adminSys/updateCustomer.jsp</result>
+			<result name="input">updateCustomer.jsp</result>
+			<result name="login">/adminSys/adminLogin.jsp</result>
 			<!-- 配置系统默认拦截器 -->
 			<interceptor-ref name="defaultStack" />
 			<!-- 配置 general 拦截器 -->
@@ -31,9 +49,26 @@
 			<result name="deletesuccess" type="redirectAction">/adminSys/getAllCustomers</result>
 			<result name="deletefail" type="redirectAction">/adminSys/getAllCustomers</result>
 		</action>
+		<action name="customerFeed" class="customerAction" method="feedback">
+			<result name="feedsuccess">/customerShop/index.jsp</result>
+			<result name="feedfail">/customerShop/register.jsp</result>
+		</action>
+		<action name="feedbackDelete" class="customerAction" method="feedbackDelete">
+			<result name="deletesuccess" type="redirectAction">/adminSys/getAllFeedbacks</result>
+			<result name="deletefail" type="redirectAction">/adminSys/getAllFeedbacks</result>
+		</action>
 		<action name="getAllCustomers" class="customerAction" method="getAllCustomers">
 		    <result name="login">/adminSys/adminLogin.jsp</result>
 			<result name="success">/adminSys/customerList.jsp</result>
+			<!-- 配置系统默认拦截器 -->
+			<interceptor-ref name="defaultStack" />
+			<!-- 配置general 拦截器 -->
+			<interceptor-ref name="general" />
+		</action>
+		<action name="getAllFeedbacks" class="customerAction" method="getAllFeedbacks">
+			<result name="success">/adminSys/feedbackList.jsp</result>
+			<result name="fail">/adminSys/feedbackList.jsp</result>
+			<result name="login">/adminSys/adminLogin.jsp</result>
 			<!-- 配置系统默认拦截器 -->
 			<interceptor-ref name="defaultStack" />
 			<!-- 配置general 拦截器 -->
@@ -43,5 +78,39 @@
 			<result name="success">/adminSys/customerList.jsp</result>
 			<result name="fail">/adminSys/customerList.jsp</result>
 		</action>
+		<action name="findLikeName" class="customerAction" method="findLikeName">
+			<result name="success">/adminSys/customerList.jsp</result>
+			<result name="fail">/adminSys/customerList.jsp</result>
+		</action>
+		<action name="findLikeItem" class="itemAction" method="findLikeItem">
+			<result name="success">/adminSys/itemList.jsp</result>
+			<result name="fail">/adminSys/itemList.jsp</result>
+		</action>	
+		<action name="getAllItems" class="itemAction" method="getAllItems">
+			<result name="success">/adminSys/itemList.jsp</result>
+			<result name="fail">/adminSys/index.html</result>
+			<result name="login">/adminSys/adminLogin.jsp</result>
+			<!-- 配置系统默认拦截器 -->
+			<interceptor-ref name="defaultStack" />
+			<!-- 配置general 拦截器 -->
+			<interceptor-ref name="general" />
+		</action>	
+		<action name="itemAdd" class="itemAction" method="itemAdd">
+			<result name="addsuccess" type="redirectAction">/adminSys/getAllItems</result>
+			<result name="addfail">/adminSys/addItem.jsp</result>
+			<result name="login">/adminSys/adminLogin.jsp</result>
+			<!-- 配置系统默认拦截器 -->
+			<interceptor-ref name="defaultStack" />
+			<!-- 配置general 拦截器 -->
+			<interceptor-ref name="general" />
+		</action>
+		<action name="itemDelete" class="itemAction" method="itemDelete">
+			<result name="deletesuccess" type="redirectAction">/adminSys/getAllItems</result>
+			<result name="deletefail" type="redirectAction">/adminSys/getAllItems</result>
+		</action>	
+		<action name="itemUpdate" class="itemAction" method="itemUpdate">
+			<result name="updatesuccess" type="redirectAction">/adminSys/getAllItems</result>
+			<result name="updatefail">/adminSys/itemDetail.jsp</result>
+		</action>	
 	</package>
 </struts>

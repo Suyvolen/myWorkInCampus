@@ -5,14 +5,15 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Query;
-import shopping.po.Customer;
-import shopping.po.Feedback;
+
+import shopping.po.Item;
 
 @SuppressWarnings("deprecation")
-public class CustomerDAO extends BaseHibernateDAO implements ICustomerDAO {
-	private Log log=LogFactory.getLog(CustomerDAO.class);
+public class ItemDAO extends BaseHibernateDAO implements IItemDAO{
+	private Log log=LogFactory.getLog(ItemDAO.class);
 	
-	public void save(Customer instance) {
+	@Override
+	public void save(Item instance) {
 		try {
 		 getSession().save(instance);
 		} catch (RuntimeException re) {
@@ -21,6 +22,7 @@ public class CustomerDAO extends BaseHibernateDAO implements ICustomerDAO {
 		}
 	}
 
+	@Override
 	public void delete(Object instance) {
 		log.debug("delete Object instance");
 		try {
@@ -31,7 +33,8 @@ public class CustomerDAO extends BaseHibernateDAO implements ICustomerDAO {
 		} 
 	}
 
-	public void update(Customer instance) {
+	@Override
+	public void update(Item instance) {
 		log.debug("update Customer instance");
 		try {
 			getSession().update(instance);
@@ -40,15 +43,8 @@ public class CustomerDAO extends BaseHibernateDAO implements ICustomerDAO {
 			throw re;
 		} 
 	}
-	
-	public void feed(Feedback instance) {
-		try {
-			 getSession().save(instance);
-			} catch (RuntimeException re) {
-				log.error("feed failed", re);
-				throw re;
-			}
-	}
+
+	@Override
 	public List findByHql(String hql) {
 		log.debug("find instances by hql");
 		try {

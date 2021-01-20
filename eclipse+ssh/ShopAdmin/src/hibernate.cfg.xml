@@ -21,5 +21,7 @@
 		<property name="hibernate.allow_update_outside_transaction">true</property>
 		<mapping resource="shopping/po/Admin.hbm.xml" />
 		<mapping resource="shopping/po/Customer.hbm.xml" />
+		<mapping resource="shopping/po/Feedback.hbm.xml" />
+		<mapping resource="shopping/po/Item.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

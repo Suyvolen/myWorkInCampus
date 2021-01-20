@@ -21,7 +21,6 @@
 	rel='stylesheet' type='text/css' />
 </head>
 <body>
-    <s:property value="#session.adminUser" />
 	<div id="wrapper">
 		<nav class="navbar navbar-default navbar-cls-top " role="navigation"
 			style="margin-bottom: 0">
@@ -63,18 +62,37 @@
 					</li>
 
 
-					<li><a href="index.html"><i class="fa fa-dashboard "></i>主页</a>
-					</li>
-					<li><a href="#"><i class="fa fa-sitemap "></i>用户管理 <span
-							class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li><a href="getAllCustomers"><i class="fa fa-bicycle "></i>用户一览</a>
-							</li>
-							<li><a href="customerUpdate"><i class="fa fa-flask "></i>用户修改</a>
-							</li>
-						</ul></li>
-					<li><a href="adminLogin.jsp"><i class="fa fa-sign-in "></i>退出</a>
-					</li>
+					<li>
+                        <a  href="index.html"><i class="fa fa-dashboard "></i>主页</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap "></i>用户管理 <span class="fa arrow"></span></a>
+                         <ul class="nav nav-second-level">
+                            <li>
+                                <a href="getAllCustomers"><i class="fa fa-bicycle "></i>用户一览</a>
+                            </li>
+                             <li>
+                                <a href="customerUpdate"><i class="fa fa-flask "></i>用户修改</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap "></i>商品管理 <span class="fa arrow"></span></a>
+                         <ul class="nav nav-second-level">
+                            <li>
+                                <a href="getAllItems"><i class="fa fa-bicycle "></i>商品一览</a>
+                            </li>
+                             <li>
+                                <a href="addItem.jsp"><i class="fa fa-flask "></i>商品添加</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                         <a href="getAllFeedbacks"><i class="fa fa-bicycle "></i>反馈信息</a>
+                    </li>
+                    <li>
+                        <a href="adminLogin.jsp"><i class="fa fa-sign-in "></i>退出</a>
+                    </li>
 				</ul>
 			</div>
 
@@ -95,17 +113,16 @@
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="panel panel-danger">
 							<div class="panel-body">
-								<form action="findByAccount" method="post" role="form">
+								<form action="findLikeName" method="post" role="form">
 									<div class="form-group">
 										<input class="form-control" type="text"
-											name="customer.account" placeholder="输入用户名以查询">
+											name="account" placeholder="输入用户名以查询">
 										<button type="submit" class="btn btn-danger">查询
 										</button><button class="btn btn-danger" 
 										style="margin-left:20px"><a href="getAllCustomers" 
 										style="text-decoration:none;color:white">用户一览</a></button>
 									</div>
 								</form>
-								
 							</div>
 						</div>
 					</div>
@@ -114,7 +131,7 @@
 					<div class="col-md-6">
 						<!--    Striped Rows Table  -->
 						<div class="panel panel-default">
-							<div class="panel-heading">Striped Rows Table</div>
+							<div class="panel-heading">Customer Table</div>
 							<div class="panel-body">
 								<div class="table-responsive">
 									<table class="table table-striped">
