@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
-namespace WindowAppTest
+namespace PhysicalFitnessTest
 {
     class Dao
     {
@@ -16,7 +16,7 @@ namespace WindowAppTest
             this.conn = new SqlConnection(connStr); //根据连接字符串,新建数据库连接
 
         }
-        public Users FindByName(Users user)//根据用户名查对象
+        public Users FindByNameAndPass(Users user)//根据用户名和密码查对象
         {
             Users result = null;
             conn.Open();
@@ -39,7 +39,7 @@ namespace WindowAppTest
         }
         public Boolean RegisterByName(Users user)
         {
-            if (FindByName(user) != null)
+            if (FindByNameAndPass(user) != null)
             {
                 return false;
             }
@@ -75,7 +75,7 @@ namespace WindowAppTest
                 conn.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = "INSERT INTO Data(UserName,SaveDate,SumScore,Height,Weight,VitalCapacity,SitAndReach,StandingLeap,ShortRun,LongRun,ChinningOrSitUp) " +
-                    "values('" + data.Name + "','" + data.Date + "','" + data.Score + "','" + data.H + "','" + data.W + "','" + data.VC +
+                    "values('" + data.UserInfprmation.Name + "','" + data.Date + "','" + data.Score + "','" + data.H + "','" + data.W + "','" + data.VC +
                     "','" + data.SAndR + "','" + data.SLeap + "','" + data.SRun + "','" + data.LRun + "','" + data.COrSU + "')";
                 cmd.Connection = conn;
                 cmd.ExecuteNonQuery();
@@ -93,7 +93,7 @@ namespace WindowAppTest
         {
             conn.Open();
             SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = "Select * from Data where UserName='" + data.Name + "'and SaveDate  = '" + data.Date + "'";
+            cmd.CommandText = "Select * from Data where UserName='" + data.UserInfprmation.Name + "'and SaveDate  = '" + data.Date + "'";
             cmd.Connection = conn;
             cmd.ExecuteNonQuery();
             SqlDataAdapter dbAdapter = new SqlDataAdapter(cmd);
@@ -111,7 +111,7 @@ namespace WindowAppTest
         {
             conn.Open();
             SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = "Delete  from Data where UserName='" + data.Name + "'and  SaveDate = '" + data.Date + "'";
+            cmd.CommandText = "Delete  from Data where UserName='" + data.UserInfprmation.Name + "'and  SaveDate = '" + data.Date + "'";
             cmd.Connection = conn;
             cmd.ExecuteNonQuery();
             conn.Close();
@@ -121,6 +121,7 @@ namespace WindowAppTest
         public Data[] FindDataByName(Users user)
         {
             conn.Open();
+            Data[] datas = null;
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = "Select * from Data where UserName='" + user.Name + "'";
             cmd.Connection = conn;
@@ -129,18 +130,16 @@ namespace WindowAppTest
             DataSet ds = new DataSet();
             dbAdapter.Fill(ds);
             int count = ds.Tables[0].Rows.Count;
-            Data[] datas = new Data[count];
-            DateTime d1 = new DateTime(2017, 11, 01);
-            for (int i = 0; i < count; i++)
+            if (ds.Tables.Count != 0 && ds.Tables[0].Rows.Count != 0)
             {
-                 datas[i]= new Data((String)ds.Tables[0].Rows[i][0], (DateTime)ds.Tables[0].Rows[i][1], (double)ds.Tables[0].Rows[i][2], (double)ds.Tables[0].Rows[i][3],(double)ds.Tables[0].Rows[i][4], (Int32)ds.Tables[0].Rows[i][5],(double)ds.Tables[0].Rows[i][6],(double)ds.Tables[0].Rows[i][7],(double)ds.Tables[0].Rows[i][8], (double)ds.Tables[0].Rows[i][9],(Int32)ds.Tables[0].Rows[i][10]);
+                datas = new Data[count];
+                for (int i = 0; i < count; i++)
+                    datas[i] = new Data((String)ds.Tables[0].Rows[i][0], (DateTime)ds.Tables[0].Rows[i][1], (double)ds.Tables[0].Rows[i][2], (double)ds.Tables[0].Rows[i][3], (double)ds.Tables[0].Rows[i][4], (Int32)ds.Tables[0].Rows[i][5], (double)ds.Tables[0].Rows[i][6], (double)ds.Tables[0].Rows[i][7], (double)ds.Tables[0].Rows[i][8], (double)ds.Tables[0].Rows[i][9], (Int32)ds.Tables[0].Rows[i][10]);
             }
-            
             conn.Close();
             return datas;
         }
-      
-    }
 
+    }
 }
 

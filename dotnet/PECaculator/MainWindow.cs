@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowAppTest
+namespace PhysicalFitnessTest
 {
     public partial class MainWindow : Form
     {
@@ -26,17 +26,22 @@ namespace WindowAppTest
 
         private void TotalScoreCalculation(object sender, EventArgs e)
         {
-
-            Data data = new Data(DateTime.Now, comboBox1.SelectedIndex,double.Parse(text_height.Text.Trim()),double.Parse(text_weight.Text.Trim()),Int32.Parse(text_vitalCapacity.Text.Trim()),double.Parse(text_sitAndReach.Text.Trim()),double.Parse(text_jump.Text.Trim()),double.Parse(text_shortRun.Text.Trim()),double.Parse(text_longRun.Text.Trim()),Int32.Parse(text_upper.Text.Trim()));
-            text_totalScore.Text = data.Score.ToString();
-            label13.Text = data.BMIScore().ToString();
-            label14.Text = data.VitalCapacityScore().ToString();
-            label15.Text = data.LongRunScore().ToString();
-            label16.Text = data.ShortRunScore().ToString();
-            label17.Text = data.StandingLeapScore().ToString();
-            label18.Text = data.ChinningOrSitUpScore().ToString();
-            label19.Text = data.SitAndReachScore().ToString();
-            //初始时隐藏按钮
+            try
+            {
+                Data data = new Data(DateTime.Now, comboBox1.SelectedIndex, double.Parse(text_height.Text.Trim()), double.Parse(text_weight.Text.Trim()), Int32.Parse(text_vitalCapacity.Text.Trim()), double.Parse(text_sitAndReach.Text.Trim()), double.Parse(text_jump.Text.Trim()), double.Parse(text_shortRun.Text.Trim()), double.Parse(text_longRun.Text.Trim()), Int32.Parse(text_upper.Text.Trim()));
+                text_totalScore.Text = data.Score.ToString();
+                label13.Text = data.BMIScore().ToString();
+                label14.Text = data.VitalCapacityScore().ToString();
+                label15.Text = data.LongRunScore().ToString();
+                label16.Text = data.ShortRunScore().ToString();
+                label17.Text = data.StandingLeapScore().ToString();
+                label18.Text = data.ChinningOrSitUpScore().ToString();
+                label19.Text = data.SitAndReachScore().ToString();
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("输入必须且必须是数字，请重新输入");
+            }
         }
 
         private void Guest_FormClosed(object sender, FormClosedEventArgs e)
@@ -59,10 +64,17 @@ namespace WindowAppTest
                 MessageBox.Show("此功能请在登录后使用！");
                 return;
             }
-            Data data = new Data(Context.loginuser.Name, DateTime.Now, Context.loginuser.Sex,double.Parse(text_height.Text.Trim()), double.Parse(text_weight.Text.Trim()), Int32.Parse(text_vitalCapacity.Text.Trim()), double.Parse(text_sitAndReach.Text.Trim()), double.Parse(text_jump.Text.Trim()), double.Parse(text_shortRun.Text.Trim()), double.Parse(text_longRun.Text.Trim()), Int32.Parse(text_upper.Text.Trim()));
-            text_totalScore.Text = data.Score.ToString();
-            Dao dao = new Dao();
-            dao.InsertByNameAndData(data);
+            try
+            {
+                Data data = new Data(Context.loginuser, DateTime.Now, double.Parse(text_totalScore.Text), double.Parse(text_height.Text.Trim()), double.Parse(text_weight.Text.Trim()), Int32.Parse(text_vitalCapacity.Text.Trim()), double.Parse(text_sitAndReach.Text.Trim()), double.Parse(text_jump.Text.Trim()), double.Parse(text_shortRun.Text.Trim()), double.Parse(text_longRun.Text.Trim()), Int32.Parse(text_upper.Text.Trim()));
+                Dao dao = new Dao();
+                dao.InsertByNameAndData(data);
+                MessageBox.Show("保存成功");
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("输入必须且必须是数字，请重新输入");
+            }
         }
 
         private void btn_LogClick(object sender, EventArgs e)
@@ -72,9 +84,16 @@ namespace WindowAppTest
                 MessageBox.Show("历史记录请在登录后查看！");
                 return;
             }
-            Showhistory showhistory = new Showhistory();
-            showhistory.Show();
-            this.Visible = false;
+            try
+            {
+                Showhistory showhistory = new Showhistory();
+                showhistory.Show();
+                this.Visible = false;
+            }
+            catch
+            {
+                MessageBox.Show("无历史记录");
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowAppTest
+namespace PhysicalFitnessTest
 {
     public partial class Login : Form
     {
@@ -39,7 +39,7 @@ namespace WindowAppTest
             String password = textBox2.Text.Trim();
             Users login=new Users(name, password, 0);
             Dao dao= new Dao();
-            Users user = dao.FindByName(login);
+            Users user = dao.FindByNameAndPass(login);
             if (user != null)
             {
                 Context.loginuser= user;

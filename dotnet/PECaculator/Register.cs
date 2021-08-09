@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowAppTest
+namespace PhysicalFitnessTest
 {
     public partial class Register : Form
     {
@@ -26,11 +26,16 @@ namespace WindowAppTest
         {
             Login login = new Login();
             login.Show();
-            this.Close();
+            this.Close();//或者this.Visible = false;
         }
 
-        private void btn_CommitClick(object sender, EventArgs e)
+        private void btn_CommitClick(object sender, EventArgs e)//提交按钮
         {
+            if(textBox1.Text == null || textBox2.Text==null || sexChoose.SelectedIndex == -1)
+            {
+                MessageBox.Show("输入不能为空，请重新输入！");
+                return;
+            }
             String name = textBox1.Text.Trim();
             String password = textBox2.Text.Trim();
             Int32 sex = sexChoose.SelectedIndex;

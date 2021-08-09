@@ -1,0 +1,79 @@
+use master
+go
+create database PhysicalFitnessTest
+	on(
+		name=PhysicalFitnessTest_Data,
+		filename='D:\SQL_Data\PhysicalFitnessTest_data.mdf',
+		size=10,
+ 		maxsize=50,
+ 		filegrowth=5)
+	log on(
+		name='PhysicalFitnessTest_Log',
+ 		filename='D:\SQL_Data\PhysicalFitnessTest_log.ldf',
+ 		size=5mb,
+		maxsize=25mb,
+ 		filegrowth=5mb)
+go
+use PhysicalFitnessTest
+go
+create table Users(
+UserName varchar(10) primary key,
+UserPassword varchar(50),
+UserSex int
+)
+create table Data(
+UserName varchar(10),
+SaveDate Date,	//保存时间
+SumScore float,	//总分
+Height float,	//身高
+Weight float,	//体重
+VitalCapacity int,	//肺活量
+SitAndReach float,	//坐位体前屈
+StandingLeap float,	//立定跳远
+ShortRun float,	//50米
+LongRun float,	//1000米或800米
+ChinningOrSitUp int,	//引体向上或仰卧起坐
+PRIMARY KEY(UserName,SaveDate) ,//联合主键
+constraint FK_UserName foreign key(UserName) references Users//外键依赖
+)
+
+
+
+use master
+go
+create database PhysicalFitnessTest
+	on(
+		name=PhysicalFitnessTest_Data,
+		filename='D:\SQL_Data\PhysicalFitnessTest_data.mdf',
+		size=10,
+ 		maxsize=50,
+ 		filegrowth=5)
+	log on(
+		name='PhysicalFitnessTest_Log',
+ 		filename='D:\SQL_Data\PhysicalFitnessTest_log.ldf',
+ 		size=5mb,
+		maxsize=25mb,
+ 		filegrowth=5mb)
+go
+use PhysicalFitnessTest
+go
+create table Users(
+UserName varchar(10) primary key,
+UserPassword varchar(50),
+UserSex int
+)
+create table Data(
+UserName varchar(10),
+SaveDate Date,
+SumScore float,
+Height float,
+Weight float,
+VitalCapacity int,
+SitAndReach float,
+StandingLeap float,
+ShortRun float,
+LongRun float,
+ChinningOrSitUp int,
+PRIMARY KEY(UserName,SaveDate) ,
+constraint FK_UserName foreign key(UserName) references Users
+)
